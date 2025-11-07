@@ -1,0 +1,262 @@
+body {
+    font-family: 'JetBrains Mono', monospace;
+    color: #fff;
+    min-height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 20px 80px 20px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+#video-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -100;
+}
+
+#background-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: cover;
+    z-index: -101;
+}
+
+#video-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    z-index: -99;
+    animation: fade-loop 15s infinite;
+    pointer-events: none;
+}
+
+.profile-card {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 12px;
+    padding: 30px 20px;
+    text-align: center;
+    width: 100%;
+    max-width: 450px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+    position: relative;
+    margin-bottom: 20px;
+    color: #f5f5f5;
+    z-index: 10;
+}
+
+.profile-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    aspect-ratio: 1/1;
+    border: 3px solid #720303;
+    margin-bottom: 10px;
+}
+
+h2 {
+    margin-top: 5px;
+    margin-bottom: 0px;
+    font-size: 1.8em;
+    font-weight: bold;
+}
+
+.subtitle {
+    font-size: 0.9em;
+    color: #bbb;
+    margin-bottom: 1px;
+    min-height: 1.2em;
+    display: inline-block;
+    position: relative;
+}
+
+.subtitle::after {
+    content: ' ';
+    display: inline-block;
+    width: 2px;
+    height: 1em;
+    background-color: #720303;
+    animation: blink-caret 0.75s step-end infinite;
+    margin-left: 3px;
+    vertical-align: middle;
+}
+
+@keyframes blink-caret {
+
+    from,
+    to {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+.music-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    background-color: #720303;
+    color: transparent;
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    padding: 0;
+    background-image: url('./img/play.png');
+    background-size: 50%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s, box-shadow 0.2s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.music-button.is-playing {
+    background-image: url('./img/pause.png');
+}
+
+.music-button:hover {
+    background-color: #720303;
+    transform: scale(1.1);
+}
+
+.music-button:active {
+    transform: scale(1.0);
+}
+
+#background-audio {
+    display: none;
+}
+
+.social-bar {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 30px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    flex-shrink: 0;
+}
+
+.social-bar a {
+    text-decoration: none;
+    transition: transform 0.2s ease-in-out;
+}
+
+.social-bar a:hover {
+    transform: translateY(-5px) scale(1.1);
+}
+
+.social-icon {
+    width: 40px !important;
+    height: 40px !important;
+    object-fit: cover;
+    flex-shrink: 0;
+    border-radius: 50%;
+    border: none;
+}
+
+@media (max-width: 480px) {
+    .profile-card {
+        padding: 20px 15px;
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+    }
+
+    .profile-image {
+        width: 100px;
+        height: 100px;
+    }
+
+    .social-icon {
+        width: 60px !important;
+        height: 60px !important;
+    }
+
+    .social-bar {
+        gap: 8px;
+    }
+
+    body {
+        padding-bottom: 70px;
+    }
+
+    .music-button {
+        width: 40px;
+        height: 40px;
+        bottom: 15px;
+        right: 15px;
+    }
+}
+
+@keyframes fade-loop {
+    0% {
+        opacity: 1;
+    }
+
+    5% {
+        opacity: 0;
+    }
+
+    95% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.credit {
+    /* Centraliza HORIZONTALMENTE o texto dentro da div */
+    width: 100%;
+    text-align: center;
+
+    /* Posicionamento FIXO no Centro Inferior */
+    position: fixed;
+    /* O texto fica fixo, não rola */
+    bottom: 0;
+    /* Alinha na parte inferior */
+    left: 0;
+    /* Cobre toda a largura da tela */
+
+    /* Estilização */
+    color: rgba(255, 255, 255, 0.5);
+    /* Cor clara e semi-transparente para não competir */
+    font-size: 0.7em;
+    padding: 5px 0 5px 0;
+    /* Padding sutil */
+    z-index: 999;
+    /* Garante que fique acima de quase tudo (exceto o botão de música) */
+
+    /* Opcional: Um fundo sutil para melhor contraste */
+    /* background: rgba(0, 0, 0, 0.3); */
+}
+
+/* Remove a margem padrão do parágrafo dentro da classe .credit */
+.credit p {
+    margin: 0;
+}
